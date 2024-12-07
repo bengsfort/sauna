@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "Windows",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/third_party/raylib/src/**"
+            ],
+            "intelliSenseMode": "windows-msvc-x64",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "MacOSX",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/third_party/raylib/src/**",
+                "/usr/local/include"
+            ],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "intelliSenseMode": "macos-clang-x64",
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

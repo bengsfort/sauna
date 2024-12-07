@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "name": "Mac:Debug",
+            "generator": "Unix Makefiles",
+            "configurationType": "Debug",
+            "buildRoot": "${projectDir}/build/Debug",
+            "cmakeCommandArgs": "",
+            "buildCommandArgs": "-j",
+            "ctestCommandArgs": ""
+        },
+		{
+            "name": "Mac:Release",
+            "generator": "Unix Makefiles",
+            "configurationType": "Release",
+            "buildRoot": "${projectDir}/build/Release",
+            "cmakeCommandArgs": "",
+            "buildCommandArgs": "-j",
+            "ctestCommandArgs": ""
+        },
+        {
+            "name": "Windows:Debug",
+            "generator": "Visual Studio 17 2022",
+            "configurationType": "Debug",
+            "buildRoot": "${projectDir}/build/Debug",
+            "cmakeCommandArgs": "",
+            "buildCommandArgs": "/m",
+            "ctestCommandArgs": ""
+        },
+		{
+            "name": "Windows:Debug",
+            "generator": "Visual Studio 17 2022",
+            "configurationType": "Release",
+            "buildRoot": "${projectDir}/build/Release",
+            "cmakeCommandArgs": "",
+            "buildCommandArgs": "/m",
+            "ctestCommandArgs": ""
+        }
+    ]
+}
