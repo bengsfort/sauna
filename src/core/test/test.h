@@ -2,8 +2,5 @@
 
 namespace Core
 {
-	char* GetName()
-	{
-		return "Core";
-	}
+	char* GetName();
 }
