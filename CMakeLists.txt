@@ -12,7 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Dependencies
 set(RAYLIB_VERSION 5.5)
-find_package(raylib ${RAYLIB_VERSION} REQUIRED) # QUIET or REQUIRED
+find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
 
 if (NOT raylib_FOUND) # If there's none, fetch and build raylib
   include(FetchContent)
@@ -47,25 +47,18 @@ add_custom_target(copy_resources ALL
 option(BUILD_EDITOR "Build the editor executable" ON)
 option(BUILD_GAME "Build the game executable" ON)
 
-add_subdirectory(modules/core)
+add_subdirectory(src/core)
 
 if (BUILD_EDITOR)
 	message("Editor WILL be built")
-	add_subdirectory(modules/editor)
+	add_subdirectory(src/editor)
 else()
 	message("Editor will NOT be built")
 endif()
 
 if (BUILD_GAME)
 	message("Game WILL be built")
-	add_subdirectory(modules/game)
+	add_subdirectory(src/game)
 else()
 	message("Game will NOT be built")
-endif()
-
-# Checks if OSX and links appropriate frameworks (Only required on MacOS)
-if (APPLE)
-    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
-    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
-    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif()
