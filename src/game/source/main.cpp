@@ -1,8 +1,15 @@
 #include <iostream>
-#include "test/test.h"
+#include "core/application.h"
 
+using namespace sauna_core;
 
 int main() {
-	std::cout << "Hello, World! " << Core::GetName() << std::endl;
+	Application app;
+	app.init();
+
+	while (app.isRunning()) {
+		app.tick();
+	}
+
 	return 0;
 }
