@@ -12,7 +12,7 @@ typedef struct RotationAxisAngle
 	Vector3 axis;
 } RotationAxisAngle;
 
-Matrix QuaternionToMatrix(Quaternion q)
+inline Matrix QuaternionToMatrix(Quaternion q)
 {
 	auto result = MatrixIdentity();
 

@@ -76,7 +76,14 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "xstring": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "__locale": "cpp",
+        "execution": "cpp",
+        "forward_list": "cpp",
+        "locale": "cpp",
+        "print": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     },
     "explorer.excludeGitIgnore": false,
 	"files.exclude": {

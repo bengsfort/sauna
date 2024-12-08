@@ -22,22 +22,30 @@ void Application::init()
 bool Application::isRunning() const
 {
 	bool isRunning = !WindowShouldClose();
-	std::cout << "Is application running? " << isRunning << std::endl;
     return isRunning;
 }
 
 void Application::tick()
 {
-	// Update game state
-	// TODO
+	if (!m_activeScene) {
+		BeginDrawing();
+		ClearBackground(BLACK);
 
-	std::cout << "Application tick" << std::endl;
+		DrawText("No active scene", 16, 16, 20, LIGHTGRAY);
+
+		EndDrawing();
+		return;
+	}
+
+	// Update game state
+	m_activeScene->update();
 
 	// Draw
 	BeginDrawing();
 	ClearBackground(BLACK);
 
-	DrawText("Hello world", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 20, LIGHTGRAY);
+	// TODO: Avoid indirection here?
+	m_activeScene->draw();
 
 	EndDrawing();
 }
@@ -45,6 +53,12 @@ void Application::tick()
 void Application::shutdown()
 {
 	std::cout << "Application shutdown" << std::endl;
+
+	if (m_activeScene)
+	{
+		m_activeScene->cleanup();
+		delete m_activeScene;
+	}
 
 	// Cleanup
 	CloseWindow();

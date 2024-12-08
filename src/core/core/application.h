@@ -1,5 +1,7 @@
 #pragma once
 
+#include "core/scene.h"
+
 namespace sauna_core
 {
 
@@ -16,6 +18,12 @@ public:
 	bool isRunning() const;
 	void tick();
 	void shutdown();
+
+	inline void setActiveScene(Scene* scene) { m_activeScene = scene; };
+	inline Scene* getActiveScene() const { return m_activeScene; };
+
+private:
+	Scene* m_activeScene;
 };
 
 }; // namespace sauna_core

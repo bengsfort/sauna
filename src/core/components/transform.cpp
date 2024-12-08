@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <iostream>
 
 #include "transform.h"
 #include "math/raylib_utils.h"
@@ -25,6 +26,8 @@ Transform::Transform(Vector3 position, sauna_math::RotationAxisAngle rotation, V
 
 Transform::~Transform()
 {
+	std::cout << "Transform destroyed" << std::endl;
+
 	// Clean up pointers
 	for (auto child : m_children)
 	{
@@ -201,5 +204,13 @@ Matrix Transform::_makeParentToLocalMatrix() const
 	return MatrixInvert(_makeLocalToParentMatrix());
 }
 
+std::string Transform::toString() const
+{
+	std::string result = "Transform: ";
+	result += "Position: (" + std::to_string(m_position.x) + ", " + std::to_string(m_position.y) + ", " + std::to_string(m_position.z) + ")";
+	result += " Scale: (" + std::to_string(m_scale.x) + ", " + std::to_string(m_scale.y) + ", " + std::to_string(m_scale.z) + ")";
+	result += " Rotation: (" + std::to_string(m_rotation.x) + ", " + std::to_string(m_rotation.y) + ", " + std::to_string(m_rotation.z) + ", " + std::to_string(m_rotation.w) + ")";
+	return result;
+}
 
 }; // namespace sauna_components

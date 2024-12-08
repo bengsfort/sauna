@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #include "raylib.h"
 #include "math/raylib_utils.h"
@@ -43,6 +44,8 @@ public:
 	static Matrix extractRotation(const Matrix& matrix);
 	static Vector3 extractScale(const Matrix& matrix);
 
+	// Utils
+	std::string toString() const;
 private:
 	Transform* m_parent;
 	std::vector<Transform*> m_children; // TODO: should this be list instead?
