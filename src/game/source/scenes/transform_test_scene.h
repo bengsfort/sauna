@@ -28,7 +28,7 @@ private:
 	Entity m_entities[MAX_ENTITIES];
 	sauna_components::Transform m_transforms[MAX_ENTITIES];
 	Camera3D m_camera;
-	float m_spin;
+	float m_spin = 1.0f;
 };
 
 }; // namespace sauna_game

@@ -7,7 +7,6 @@ using namespace sauna_game;
 // TODO: The objects just fly away, but the transforms look to have the correct data...
 // Something wrong with the transformation to the raylib structs?
 TransformTestScene::TransformTestScene()
-	: m_entities(), m_transforms(), m_spin(1.0f)
 {}
 
 TransformTestScene::~TransformTestScene()
@@ -18,9 +17,9 @@ TransformTestScene::~TransformTestScene()
 void TransformTestScene::setup()
 {
 	m_camera = { 0 };
-    m_camera.position = (Vector3){ 0.0f, 10.0f, 10.0f };  // Camera position
-    m_camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };      // Camera looking at point
-    m_camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    m_camera.position = { 0.0f, 10.0f, 10.0f };  // Camera position
+    m_camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
+    m_camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
     m_camera.fovy = 45.0f;                                // Camera field-of-view Y
     m_camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
