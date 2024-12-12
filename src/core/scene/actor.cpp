@@ -7,14 +7,14 @@
 
 using namespace sauna_scene;
 
-template<typename ComponentType>
-ComponentType* Actor::addComponent()
+template<typename T>
+T* Actor::addComponent()
 {
-    if constexpr (std::is_base_of_v<PhysicsComponent, ComponentType>) {
+    if constexpr (std::is_base_of_v<PhysicsComponent, T>) {
         // addPhysicsComponent
-    } else if constexpr (std::is_base_of_v<RenderComponent3D, ComponentType>) {
+    } else if constexpr (std::is_base_of_v<RenderComponent3D, T>) {
         // addRender3DComponent
-    } else if constexpr (std::is_base_of_v<RenderComponent2D, ComponentType>) {
+    } else if constexpr (std::is_base_of_v<RenderComponent2D, T>) {
         // addRender2DComponent
     } else {
         // add normal component
