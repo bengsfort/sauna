@@ -1,3 +1,4 @@
+#include "raylib.h"
 #include "scene/scene.h"
 
 using namespace sauna_scene;
@@ -17,7 +18,8 @@ T* Scene::addRenderComponent(Args&&... args)
 {
     auto component = std::make_unique<T>(std::forward<Args>(args)...);
 
-    if constexpr (std::is_base_of_v<RenderComponent2D, T>) {
+    if constexpr (std::is_base_of_v<RenderComponent2D, T>)
+	{
         m_render2dComponents.push_back(std::move(component));
     } else if constexpr (std::is_base_of_v<RenderComponent3D, T>) {
         m_render3dComponents.push_back(std::move(component));
@@ -47,20 +49,25 @@ void Scene::update(float deltaTime)
     // TODO: update physics system?
 }
 
-void Scene::draw3d(float deltaTime)
+void Scene::draw(float deltaTime)
 {
-    for (auto& component : m_render3dComponents)
-    {
-        component->draw(deltaTime);
-    }
-}
+	BeginDrawing();
+	ClearBackground(clearColor);
 
-void Scene::draw2d(float deltaTime)
-{
-    for (auto& component : m_render2dComponents)
-    {
-        component->draw(deltaTime);
-    }
+	for (auto& component : m_render2dComponents)
+	{
+		component->draw(deltaTime);
+	}
+
+	BeginMode3D(this->camera);
+
+	for (auto& component : m_render3dComponents)
+	{
+		component->draw(deltaTime);
+	}
+
+	EndMode3D();
+	EndDrawing();
 }
 
 void Scene::cleanup()

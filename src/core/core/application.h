@@ -1,9 +1,11 @@
 #pragma once
 
-#include "core/scene.h"
+#include "scene/scene.h"
 
 namespace sauna_core
 {
+
+using namespace sauna_scene;
 
 class Application
 {
