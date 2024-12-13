@@ -1,10 +1,14 @@
 #pragma once
 
+#include "scene/transform.h"
+
 namespace sauna_scene
 {
 
 class Actor
 {
+public:
+
 public:
     Actor() {}
     virtual ~Actor() = default;

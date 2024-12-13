@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include "raylib.h"
 
 #include "scene/render_component_2d.h"
 #include "scene/render_component_3d.h"
@@ -11,6 +12,7 @@
 namespace sauna_scene
 {
 
+// TODO: Need to figure out how to handle cameras. Defaulting to Camera3D for now.
 class Scene
 {
 private:
@@ -18,6 +20,10 @@ private:
     std::vector<std::unique_ptr<RenderComponent2D>> m_render2dComponents;
     std::vector<std::unique_ptr<RenderComponent3D>> m_render3dComponents;
     std::vector<std::unique_ptr<Actor>> m_actors;
+
+public:
+	Color clearColor;
+	Camera3D camera;
 
 public:
     ~Scene();
@@ -32,8 +38,7 @@ public:
     T* addActor(Args&&... args);
 
     void update(float deltaTime);
-    void draw2d(float deltaTime);
-    void draw3d(float deltaTime);
+    void draw(float deltaTime);
     void cleanup();
 };
 

@@ -6,17 +6,26 @@
 #include "raylib.h"
 #include "math/raylib_utils.h"
 
-namespace sauna_components
+namespace sauna_scene
 {
 
 using namespace sauna_math;
+
 class Transform
 {
+private:
+	Transform* m_parent;
+	std::vector<Transform*> m_children; // TODO: should this be list instead?
+
+	Vector3 m_position;
+	Vector3 m_scale;
+	Vector3 m_origin;
+	Quaternion m_rotation;
+
 public:
 	Transform();
 	Transform(Vector3 position, RotationAxisAngle rotation, Vector3 scale);
 	~Transform();
-    Transform(const Transform& copy) = delete; // disallow copies
 
 	// Hierarchy operations
 	Transform* getParent() const;
@@ -46,15 +55,8 @@ public:
 
 	// Utils
 	std::string toString() const;
+
 private:
-	Transform* m_parent;
-	std::vector<Transform*> m_children; // TODO: should this be list instead?
-
-	Vector3 m_position;
-	Vector3 m_scale;
-	Vector3 m_origin;
-	Quaternion m_rotation;
-
 	Matrix _makeLocalToParentMatrix() const;
 	Matrix _makeParentToLocalMatrix() const;
 };

@@ -1,10 +1,10 @@
 #include <assert.h>
 #include <iostream>
 
-#include "transform.h"
+#include "scene/transform.h"
 #include "math/raylib_utils.h"
 
-namespace sauna_components
+namespace sauna_scene
 {
 
 Transform::Transform()
@@ -213,4 +213,4 @@ std::string Transform::toString() const
 	return result;
 }
 
-}; // namespace sauna_components
+}; // namespace sauna_scene
