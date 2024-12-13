@@ -1,16 +1,26 @@
 #pragma once
 
+#include <vector>
+#include <memory>
+
+#include "scene/scene.h"
+#include "scene/component.h"
+
 namespace sauna_scene
 {
 
 class Actor
 {
-public:
-    Actor() {}
-    virtual ~Actor() = default;
+private:
+    Scene* m_scene;
+    std::vector<std::unique_ptr<Component>> m_components;
 
-    template<typename ComponentType>
-    ComponentType* addComponent();
+public:
+    Actor(Scene* scene);
+    virtual ~Actor();
+
+    template<typename T, typename... Args>
+    T* addComponent(Args&&... args);
 
     template<typename ComponentType>
     ComponentType* getComponent();
