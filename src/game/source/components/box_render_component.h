@@ -1,8 +1,8 @@
 #pragma once
 
 #include "raylib.h"
-#include "scene/transform.h"
-#include "scene/render_component_3d.h"
+#include "core_lib/scene/transform.h"
+#include "core_lib/scene/render_component_3d.h"
 
 namespace sauna_game
 {

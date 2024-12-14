@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib.h"
-#include "scene/scene.h"
+#include "core_lib/scene/scene.h"
 
 namespace sauna_game
 {

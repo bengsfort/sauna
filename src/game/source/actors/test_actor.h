@@ -1,7 +1,7 @@
 #pragma once
 
-#include "scene/scene.h"
-#include "scene/actor.h"
+#include "core_lib/scene/scene.h"
+#include "core_lib/scene/actor.h"
 
 namespace sauna_game
 {
