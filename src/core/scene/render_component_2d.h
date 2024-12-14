@@ -8,8 +8,8 @@ class RenderComponent2D
 public:
     virtual ~RenderComponent2D() = default;
     
-    virtual void update(float timeDelta) {}
-    virtual void draw(float timeDelta) {}
+    virtual inline void update(float timeDelta) {}
+    virtual inline void draw(float timeDelta) {}
 };
 
 }; // namespace sauna_scene

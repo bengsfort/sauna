@@ -14,6 +14,7 @@ Transform::Transform()
 	, m_origin(Vector3Zero())
 	, m_rotation(QuaternionIdentity())
 {
+	std::cout << "Transform created" << std::endl;
 }
 
 Transform::Transform(Vector3 position, sauna_math::RotationAxisAngle rotation, Vector3 scale)

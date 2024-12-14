@@ -21,11 +21,11 @@ public:
 	void tick();
 	void shutdown();
 
-	inline void setActiveScene(Scene* scene) { m_activeScene = scene; };
-	inline Scene* getActiveScene() const { return m_activeScene; };
+	inline void setActiveScene(std::unique_ptr<Scene> scene) { m_activeScene = std::move(scene); };
+	// inline std::unique_ptr<Scene> getActiveScene() const { return m_activeScene; };
 
 private:
-	Scene* m_activeScene;
+	std::unique_ptr<Scene> m_activeScene;
 };
 
 }; // namespace sauna_core

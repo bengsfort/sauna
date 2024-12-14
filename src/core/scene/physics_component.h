@@ -8,8 +8,8 @@ class PhysicsComponent
 public:
     virtual ~PhysicsComponent() = default;
     
-    virtual void update(float timeDelta) {}
-    virtual void fixedUpdate(float fixedTimeDelta) {}
+    virtual inline void update(float timeDelta) {}
+    virtual inline void fixedUpdate(float fixedTimeDelta) {}
 };
 
 }; // namespace sauna_scene

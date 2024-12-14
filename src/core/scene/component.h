@@ -7,7 +7,7 @@ class Component
 {
 public:
     virtual ~Component() = default;
-    virtual void update(float deltaTime) {}
+    virtual inline void update(float deltaTime) {}
 };
 
 }; // namespace sauna_scene

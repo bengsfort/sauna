@@ -38,14 +38,14 @@ void Application::tick()
 	}
 
 	// Update game state
-	m_activeScene->update();
+	m_activeScene->update(0.0f);
 
 	// Draw
 	BeginDrawing();
 	ClearBackground(BLACK);
 
 	// TODO: Avoid indirection here?
-	m_activeScene->draw();
+	m_activeScene->draw(0.0f);
 
 	EndDrawing();
 }
@@ -57,7 +57,7 @@ void Application::shutdown()
 	if (m_activeScene)
 	{
 		m_activeScene->cleanup();
-		delete m_activeScene;
+		m_activeScene.release();
 	}
 
 	// Cleanup

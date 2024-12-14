@@ -1,42 +1,10 @@
 #include "raylib.h"
 #include "scene/scene.h"
+#include "scene/actor.h"
+#include "scene/render_component_2d.h"
+#include "scene/render_component_3d.h"
 
 using namespace sauna_scene;
-
-// Instance management ---------------------------------
-template<typename T, typename... Args>
-T* Scene::addPhysicsComponent(Args&&... args)
-{
-    auto component = std::make_unique<T>(std::forward<Args>(args)...);
-    m_physicsComponents.push_back(std::move(component));
-    T* componentPtr = component.get();
-    return componentPtr;
-}
-
-template<typename T, typename... Args>
-T* Scene::addRenderComponent(Args&&... args)
-{
-    auto component = std::make_unique<T>(std::forward<Args>(args)...);
-
-    if constexpr (std::is_base_of_v<RenderComponent2D, T>)
-	{
-        m_render2dComponents.push_back(std::move(component));
-    } else if constexpr (std::is_base_of_v<RenderComponent3D, T>) {
-        m_render3dComponents.push_back(std::move(component));
-    }
-
-    T* componentPtr = component.get();
-    return componentPtr;
-}
-
-template<typename T, typename... Args>
-T* Scene::addActor(Args&&... args)
-{
-    auto actor = std::make_unique<T>(std::forward<Args>(args)...);
-    m_actors.push_back(std::move(actor));
-    T* actorPtr = actor.get();
-    return actorPtr;
-}
 
 // Lifecycle methods -----------------------------------
 void Scene::update(float deltaTime)
@@ -51,6 +19,8 @@ void Scene::update(float deltaTime)
 
 void Scene::draw(float deltaTime)
 {
+    UpdateCamera(&camera, CAMERA_ORBITAL);
+
 	BeginDrawing();
 	ClearBackground(clearColor);
 
