@@ -9,7 +9,7 @@ namespace sauna_game
 class TransformTestScene : public sauna_scene::Scene
 {
 public:
-	void initialize() override;
+	void initialize();
 };
 
 }; // namespace sauna_game

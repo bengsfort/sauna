@@ -11,8 +11,8 @@ int main() {
 	Application app;
 	app.init();
 
-	auto scene = std::make_unique<TransformTestScene>();
-	scene->initialize();
+	// auto scene = std::make_unique<TransformTestScene>();
+	// scene->initialize();
 
 	while (app.isRunning()) {
 		app.tick();

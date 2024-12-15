@@ -17,11 +17,11 @@ public:
 private:
 
 public:
-    Actor();
-    virtual ~Actor();
+    Actor() = default;
+    virtual ~Actor() = default;
 
-    virtual void update(float deltaTime);
-    virtual void draw(float deltaTime);
+    virtual void update(float deltaTime) = 0;
+    virtual void draw(float deltaTime) = 0;
 };
 
 }; // namespace sauna_scene
