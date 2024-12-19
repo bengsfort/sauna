@@ -10,15 +10,20 @@ using namespace sauna_scene;
 class Application
 {
 public:
-	Application();
-	~Application();
+	virtual ~Application();
 
 	Application(const Application&) = delete; // Prevent copying
 	Application& operator=(const Application&) = delete; // Prevent copy assignment
 
-	void init();
-	void run();
-	void shutdown();
+	virtual void init();
+	virtual void run();
+	virtual void shutdown();
+
+protected:
+	virtual void update();
+
+private:
+	void initCoreSystems();
 };
 
 }; // namespace sauna_core

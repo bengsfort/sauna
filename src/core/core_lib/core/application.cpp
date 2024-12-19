@@ -8,8 +8,6 @@ using namespace sauna_core;
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 450;
 
-Application::Application() {}
-
 void Application::init()
 {
 	std::cout << "Application init" << std::endl;
