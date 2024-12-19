@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib.h"
-#include "scene/scene.h"
+#include "core_lib/scene/scene.h"
 
 namespace sauna_game
 {
@@ -9,7 +9,7 @@ namespace sauna_game
 class TransformTestScene : public sauna_scene::Scene
 {
 public:
-	void initialize() override;
+	void initialize();
 };
 
 }; // namespace sauna_game

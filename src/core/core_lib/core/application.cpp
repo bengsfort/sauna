@@ -1,14 +1,12 @@
 #include <iostream>
-
-#include "application.h"
 #include "raylib.h"
+
+#include "core_lib/core/application.h"
 
 using namespace sauna_core;
 
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 450;
-
-Application::Application() {}
 
 void Application::init()
 {
@@ -27,25 +25,15 @@ bool Application::isRunning() const
 
 void Application::tick()
 {
-	if (!m_activeScene) {
-		BeginDrawing();
-		ClearBackground(BLACK);
-
-		DrawText("No active scene", 16, 16, 20, LIGHTGRAY);
-
-		EndDrawing();
-		return;
-	}
+	// Consume input
 
 	// Update game state
-	m_activeScene->update(0.0f);
 
 	// Draw
 	BeginDrawing();
 	ClearBackground(BLACK);
 
-	// TODO: Avoid indirection here?
-	m_activeScene->draw(0.0f);
+	// Draw active scene
 
 	EndDrawing();
 }
@@ -53,12 +41,6 @@ void Application::tick()
 void Application::shutdown()
 {
 	std::cout << "Application shutdown" << std::endl;
-
-	if (m_activeScene)
-	{
-		m_activeScene->cleanup();
-		m_activeScene.release();
-	}
 
 	// Cleanup
 	CloseWindow();

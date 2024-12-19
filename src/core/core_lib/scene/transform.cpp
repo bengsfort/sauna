@@ -1,8 +1,8 @@
 #include <assert.h>
 #include <iostream>
 
-#include "scene/transform.h"
-#include "math/raylib_utils.h"
+#include "core_lib/scene/transform.h"
+#include "core_lib/math/raylib_utils.h"
 
 namespace sauna_scene
 {
