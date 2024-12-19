@@ -4,7 +4,7 @@
 #include <string>
 
 #include "raylib.h"
-#include "math/raylib_utils.h"
+#include "core_lib/math/raylib_utils.h"
 
 namespace sauna_scene
 {

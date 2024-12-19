@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 
-#include "core/application.h"
+#include "core_lib/core/application.h"
 #include "scenes/transform_test_scene.h"
 
 using namespace sauna_core;
@@ -11,10 +11,8 @@ int main() {
 	Application app;
 	app.init();
 
-	auto scene = std::make_unique<TransformTestScene>();
-	scene->initialize();
-
-	app.setActiveScene(scene);
+	// auto scene = std::make_unique<TransformTestScene>();
+	// scene->initialize();
 
 	while (app.isRunning()) {
 		app.tick();
