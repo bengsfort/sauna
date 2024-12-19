@@ -17,8 +17,7 @@ public:
 	Application& operator=(const Application&) = delete; // Prevent copy assignment
 
 	void init();
-	bool isRunning() const;
-	void tick();
+	void run();
 	void shutdown();
 };
 
