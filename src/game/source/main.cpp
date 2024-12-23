@@ -1,22 +1,13 @@
-#include <iostream>
-#include <memory>
+#include "game_application.h"
 
-#include "core_lib/core/application.h"
-#include "scenes/transform_test_scene.h"
-
-using namespace sauna_core;
 using namespace sauna_game;
 
 int main() {
-	Application app;
+	GameApplication app;
+
 	app.init();
-
-	// auto scene = std::make_unique<TransformTestScene>();
-	// scene->initialize();
-
-	while (app.isRunning()) {
-		app.tick();
-	}
+	app.run();
+	app.shutdown();
 
 	return 0;
 }

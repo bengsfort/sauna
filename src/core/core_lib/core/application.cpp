@@ -5,48 +5,49 @@
 
 using namespace sauna_core;
 
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 450;
+Application::Application() : graphics()
+{}
 
 void Application::init()
 {
 	std::cout << "Application init" << std::endl;
 
-	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
-	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Sauna Engine");
 	SetTargetFPS(60);
+	this->initCoreSystems();
 }
 
-bool Application::isRunning() const
+void Application::initCoreSystems()
 {
-	bool isRunning = !WindowShouldClose();
-    return isRunning;
+	graphics.init(m_gameTitle);
 }
 
-void Application::tick()
+void Application::run()
+{
+	while(!WindowShouldClose())
+	{
+		this->update();
+	}
+}
+
+void Application::update()
 {
 	// Consume input
 
 	// Update game state
-
-	// Draw
-	BeginDrawing();
-	ClearBackground(BLACK);
-
-	// Draw active scene
-
-	EndDrawing();
+	graphics.draw();
 }
 
 void Application::shutdown()
 {
-	std::cout << "Application shutdown" << std::endl;
+	std::cout << "Application::shutdown" << std::endl;
+	this->cleanupCoreSystems();
+}
 
-	// Cleanup
-	CloseWindow();
+void Application::cleanupCoreSystems()
+{
+	graphics.shutdown();
 }
 
 Application::~Application()
 {
-	this->shutdown();
 }

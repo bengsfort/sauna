@@ -1,15 +1,22 @@
 #pragma once
 
-#include "core_lib/scene/scene.h"
+#include "core_lib/graphics/graphic_system.h"
 
 namespace sauna_core
 {
 
-using namespace sauna_scene;
+using namespace sauna_graphics;
 
 class Application
 {
 public:
+	GraphicSystem graphics;
+
+protected:
+	const char* m_gameTitle = "Sauna Core";
+
+public:
+	Application();
 	virtual ~Application();
 
 	Application(const Application&) = delete; // Prevent copying
@@ -24,6 +31,7 @@ protected:
 
 private:
 	void initCoreSystems();
+	void cleanupCoreSystems();
 };
 
 }; // namespace sauna_core

@@ -19,6 +19,9 @@ _deps
 *.pdb
 *.idb
 
+# LSP
+.cache
+
 # Ignore build artifacts
 /third_party/raylib/build
 build
