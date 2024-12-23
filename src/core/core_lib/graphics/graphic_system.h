@@ -38,6 +38,8 @@ protected:
 	// TODO: Grab from stored settings when we have a settings system
 	int m_windowHeight = DEFAULT_WINDOW_HEIGHT;
 	int m_windowWidth = DEFAULT_WINDOW_WIDTH;
+
+	// TODO: Array of Drawables (Or do we have the scene cache drawables, and have the API be "draw scene"?)
 };
 
 }; // namespace sauna_graphics
