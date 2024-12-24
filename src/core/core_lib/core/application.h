@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core_lib/graphics/graphic_system.h"
+#include "core_lib/scene/scene_manager.h"
 
 namespace sauna_core
 {
@@ -11,6 +12,7 @@ class Application
 {
 public:
 	GraphicSystem graphics;
+	SceneManager sceneManager;
 
 protected:
 	const char* m_gameTitle = "Sauna Core";

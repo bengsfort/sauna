@@ -5,7 +5,7 @@
 
 using namespace sauna_core;
 
-Application::Application() : graphics()
+Application::Application() : graphics(), sceneManager()
 {}
 
 void Application::init()
@@ -19,6 +19,7 @@ void Application::init()
 void Application::initCoreSystems()
 {
 	graphics.init(m_gameTitle);
+	sceneManager.init();
 }
 
 void Application::run()
@@ -33,8 +34,8 @@ void Application::update()
 {
 	// Consume input
 
-	// Update game state
-	graphics.draw();
+	sceneManager.updateActiveScene();
+	graphics.draw(sceneManager.getActiveScene());
 }
 
 void Application::shutdown()
@@ -46,6 +47,7 @@ void Application::shutdown()
 void Application::cleanupCoreSystems()
 {
 	graphics.shutdown();
+	sceneManager.shutdown();
 }
 
 Application::~Application()

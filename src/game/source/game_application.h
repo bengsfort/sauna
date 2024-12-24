@@ -16,6 +16,9 @@ public:
 
 protected:
 	const char* m_gameTitle = "Sauna Game";
+
+private:
+	void loadInitialScene();
 };
 
 }; // namespace sauna_game

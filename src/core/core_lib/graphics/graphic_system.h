@@ -2,8 +2,12 @@
 
 #include "raylib.h"
 
+#include "core_lib/scene/scene.h"
+
 namespace sauna_graphics
 {
+
+using namespace sauna_scene;
 
 const int DEFAULT_WINDOW_WIDTH = 1200;
 const int DEFAULT_WINDOW_HEIGHT = 800;
@@ -28,7 +32,8 @@ public:
 	}
 
 	void init(const char* windowTitle);
-	void draw();
+	// TODO: This should maybe be an array of drawables instead
+	void draw(GameScene* scene);
 	void shutdown();
 
 public:

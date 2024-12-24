@@ -33,13 +33,17 @@ void GraphicSystem::shutdown()
 	CloseWindow();
 }
 
-void GraphicSystem::draw()
+void GraphicSystem::draw(sauna_scene::GameScene* scene)
 {
 	BeginDrawing();
 	ClearBackground(this->clearColor);
 
-	// TODO: Iterate over drawables.
-	DrawText("No active scene!", m_windowWidth * 0.5f, m_windowHeight * 0.5f, 24, WHITE);
+	if (scene == nullptr) {
+		// TODO: Iterate over drawables.
+		DrawText("No active scene!", m_windowWidth * 0.5f, m_windowHeight * 0.5f, 24, WHITE);
+	} else {
+		scene->drawScene();
+	}
 
 	EndDrawing();
 }
