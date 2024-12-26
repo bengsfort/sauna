@@ -45,5 +45,6 @@ void GraphicSystem::draw(sauna_scene::GameScene* scene)
 		scene->drawScene();
 	}
 
+	DrawFPS(16.0f, m_windowHeight - 24.0f);
 	EndDrawing();
 }

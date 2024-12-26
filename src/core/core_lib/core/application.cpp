@@ -2,6 +2,7 @@
 #include "raylib.h"
 
 #include "core_lib/core/application.h"
+#include "core_lib/core/logger.h"
 
 using namespace sauna_core;
 
@@ -10,7 +11,7 @@ Application::Application() : graphics(), sceneManager()
 
 void Application::init()
 {
-	std::cout << "Application init" << std::endl;
+	Logger::LogInfo("Application init");
 
 	SetTargetFPS(60);
 	this->initCoreSystems();
