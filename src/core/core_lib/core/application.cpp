@@ -11,6 +11,7 @@ Application::Application() : graphics(), sceneManager()
 
 void Application::init()
 {
+	Logger::Init();
 	Logger::LogInfo("Application init");
 
 	SetTargetFPS(60);
@@ -43,6 +44,7 @@ void Application::shutdown()
 {
 	std::cout << "Application::shutdown" << std::endl;
 	this->cleanupCoreSystems();
+	Logger::Shutdown();
 }
 
 void Application::cleanupCoreSystems()
