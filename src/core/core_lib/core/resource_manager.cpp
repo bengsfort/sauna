@@ -31,7 +31,7 @@ void ResourceManager::Shutdown()
 
 ResourceManager::ResourceManager()
 {
-    Logger::LogInfo("App directory: " + k_AppDirectoryPath);
+    Logger::LogInfo("App directory: {}", k_AppDirectoryPath);
 
     // Setup space reservations
     m_resourceIdLookup.reserve(20);
@@ -142,7 +142,7 @@ void ResourceManager::loadResource_(Resource& resource)
         break;
 
     default:
-        Logger::LogError("Invalid resource type for resource \"{}\" provided: {}", resource.name, resource.type);
+        Logger::LogError("Invalid resource type for resource provided");
         return;
     }
 
@@ -240,7 +240,7 @@ void ResourceManager::unloadResourceById_(int id)
         break;
 
     default:
-        Logger::LogError("Invalid resource type for unloading resource \"{}\" provided: {}", resource.name, resource.type);
+        Logger::LogError("Invalid resource type for unloading resource provided");
         return;
     }
 
