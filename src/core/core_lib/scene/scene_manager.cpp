@@ -20,7 +20,7 @@ void SceneManager::setActiveScene(unique_ptr<GameScene> scene)
 
 	// TODO: Cleanup old scene? Multiple scenes?
 	m_activeScene = std::move(scene);
-
+	m_activeScene->init();
 	// TODO: Cleanup. Can use another unique_ptr to store the prev pointer,
 	// and then delete/unload it async in a background thread.
 }

@@ -19,6 +19,7 @@ protected:
 
 private:
 	void loadInitialScene();
+	void loadResources();
 };
 
 }; // namespace sauna_game

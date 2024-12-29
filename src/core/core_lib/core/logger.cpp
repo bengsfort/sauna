@@ -1,3 +1,6 @@
+#include <format>
+#include <string>
+
 #include "raylib.h"
 #include "core_lib/core/logger.h"
 
@@ -19,24 +22,4 @@ void Logger::Shutdown()
 void Logger::SetLogLevel(int level)
 {
 	SetTraceLogLevel(level);
-}
-
-void Logger::LogInfo(const std::string message)
-{
-	TraceLog(LOG_INFO, message.c_str());
-}
-
-void Logger::LogDebug(const std::string message)
-{
-	TraceLog(LOG_DEBUG, message.c_str());
-}
-
-void Logger::LogWarn(const std::string message)
-{
-	TraceLog(LOG_WARNING, message.c_str());
-}
-
-void Logger::LogError(const std::string message)
-{
-	TraceLog(LOG_ERROR, message.c_str());
 }

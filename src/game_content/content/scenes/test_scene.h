@@ -10,8 +10,8 @@ using namespace sauna_scene;
 class TestScene : public GameScene
 {
 public:
-	inline TestScene() : GameScene() {}
-	inline ~TestScene() {};
+	TestScene();
+	~TestScene();
 
 	virtual void init() override;
 	virtual void update() override;
@@ -19,6 +19,10 @@ public:
 
 private:
 	int m_currTick = 0;
+	Camera3D m_camera = { 0 };
+	Model* m_workbench = nullptr;
+	Model* m_tree = nullptr;
+	Model* m_rock = nullptr;
 };
 
 }; // namespace sauna_game

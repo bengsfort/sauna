@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "./transform_test_scene.h"
-#include "../actors/test_actor.h"
+#include "scenes/transform_test_scene.h"
 
 
 using namespace sauna_game;

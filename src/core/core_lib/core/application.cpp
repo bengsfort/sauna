@@ -3,6 +3,7 @@
 
 #include "core_lib/core/application.h"
 #include "core_lib/core/logger.h"
+#include "core_lib/core/resource_manager.h"
 
 using namespace sauna_core;
 
@@ -14,12 +15,15 @@ void Application::init()
 	Logger::Init();
 	Logger::LogInfo("Application init");
 
-	SetTargetFPS(60);
+	ResourceManager::Init();
+
+	SetTargetFPS(144);
 	this->initCoreSystems();
 }
 
 void Application::initCoreSystems()
 {
+
 	graphics.init(m_gameTitle);
 	sceneManager.init();
 }
@@ -44,6 +48,8 @@ void Application::shutdown()
 {
 	std::cout << "Application::shutdown" << std::endl;
 	this->cleanupCoreSystems();
+
+	ResourceManager::Shutdown();
 	Logger::Shutdown();
 }
 

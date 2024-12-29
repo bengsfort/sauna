@@ -1,7 +1,10 @@
-#include "core_lib/graphics/graphic_system.h"
 #include <iostream>
 
+#include "core_lib/graphics/graphic_system.h"
+#include "core_lib/core/logger.h"
+
 using namespace sauna_graphics;
+using namespace sauna_core;
 
 // TODO: Init from settings, or if none exist determine correct ones using raylib API's.
 // ie. if no settings exist, set window size to fullscreen at screen width + height.
@@ -17,11 +20,10 @@ GraphicSystem::GraphicSystem(int winWidth, int winHeight) :
 
 GraphicSystem::~GraphicSystem()
 {
-	std::cout << "Graphics shutdown" << std::endl;
-	this->shutdown();
+	Logger::LogInfo("GraphicSystem getting destroyed");
 }
 
-void GraphicSystem::init(const char* windowTitle)
+void GraphicSystem::init(const char* windowTitle) const
 {
 	// TODO: Make flags configurable
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);

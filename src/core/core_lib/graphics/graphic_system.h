@@ -31,7 +31,7 @@ public:
 		return {(float)m_windowWidth, (float)m_windowHeight};
 	}
 
-	void init(const char* windowTitle);
+	void init(const char* windowTitle) const;
 	// TODO: This should maybe be an array of drawables instead
 	void draw(GameScene* scene);
 	void shutdown();
