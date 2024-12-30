@@ -2,6 +2,7 @@
 
 #include "core_lib/core/resource_manager.h"
 #include "core_lib/core/logger.h"
+#include "core_lib/chrono/measure.h"
 
 using namespace sauna_core;
 
@@ -57,6 +58,7 @@ ResourceManager::~ResourceManager()
     unloadAllResources();
 
     // Flush queues and maps
+    m_diagnostics.flush();
     m_resourceIdLookup.clear();
     m_resourceMap.clear();
     m_queue.clear();
@@ -84,6 +86,7 @@ void ResourceManager::queueResource(const Resource& resource)
 
     Logger::LogInfo("Queuing resource: {}", resource.name);
     m_queue.emplace_back(resource);
+    m_diagnostics.addQueuedResource();
 }
 
 void ResourceManager::queueResources(std::initializer_list<const Resource> resources)
@@ -95,6 +98,7 @@ void ResourceManager::queueResources(std::initializer_list<const Resource> resou
 
 void ResourceManager::clearQueue()
 {
+    m_diagnostics.removeQueuedResource(m_queue.size());
     m_queue.clear();
 }
 
@@ -109,11 +113,14 @@ void ResourceManager::loadResource_(Resource& resource)
     }
 
     // Load given resource
-    int resourceId = ++m_idCounter;
+    auto loadFailed = false;
+    long long resourceSize = -1;
+    const int resourceId = ++m_idCounter;
     assert(!m_resourceMap.contains(resourceId));
 
+    sauna_chrono::Measure loadTimer;
     std::string resourcePath = k_AppDirectoryPath + resource.path;
-
+    
     Logger::LogInfo("Resource {} assigned ID {}, loading...", resource.name, resourceId);
     switch (resource.type)
     {
@@ -121,24 +128,32 @@ void ResourceManager::loadResource_(Resource& resource)
         assert(!m_models.contains(resourceId));
         auto model = LoadModel(resourcePath.c_str());
         m_models.insert({ resourceId, model });
+        resourceSize = sizeof(model);
+        // TODO: FAILED CHECK (CHECK RAYLIB SOURCE FOR THIS LOAD FN)
         break;
 
     case ResourceType::Font:
         assert(!m_fonts.contains(resourceId));
         auto font = LoadFont(resourcePath.c_str());
         m_fonts.insert({ resourceId, font });
+        resourceSize = sizeof(font);
+        // TODO: FAILED CHECK (CHECK RAYLIB SOURCE FOR THIS LOAD FN)
         break;
 
     case ResourceType::Image:
         assert(!m_images.contains(resourceId));
         auto image = LoadImage(resourcePath.c_str());
         m_images.insert({ resourceId, image });
+        resourceSize = sizeof(image);
+        // TODO: FAILED CHECK (CHECK RAYLIB SOURCE FOR THIS LOAD FN)
         break;
 
     case ResourceType::Texture2D:
         assert(!m_textures.contains(resourceId));
         auto texture = LoadTexture(resourcePath.c_str());
         m_textures.insert({ resourceId, texture });
+        resourceSize = sizeof(texture);
+        // TODO: FAILED CHECK (CHECK RAYLIB SOURCE FOR THIS LOAD FN)
         break;
 
     default:
@@ -155,6 +170,14 @@ void ResourceManager::loadResource_(Resource& resource)
     m_resourceIdLookup.emplace(resource.name, resourceId);
     m_resourceMap.emplace(resourceId, resource);
     Logger::LogInfo("Resource {} loaded.", resource.name, resourceId);
+
+    if (loadFailed) {
+        m_diagnostics.addFailedResource();
+        return;
+    }
+
+    loadTimer.done();
+    m_diagnostics.addLoadedResource(resource.scope, loadTimer.getDurationMilliseconds(), resourceSize);
 }
 
 void ResourceManager::loadQueuedResources()
@@ -182,6 +205,7 @@ void ResourceManager::loadQueuedResources()
             m_loadActive = false;
             m_loadProgress = 0.0f;
             m_cancelLoadFlag = false;
+            m_diagnostics.addCancelledResource(total - numLoaded);
             return;
         }
 
@@ -212,29 +236,34 @@ void ResourceManager::unloadResourceById_(int id)
         return;
     }
 
+    long long resourceSize = -1;
     auto& resource = m_resourceMap[id];
 
     switch (resource.type) {
     case ResourceType::Model:
         assert(m_models.contains(id));
+        resourceSize = sizeof(m_models[id]);
         UnloadModel(m_models[id]);
         m_models.erase(id);
         break;
 
     case ResourceType::Font:
         assert(m_fonts.contains(id));
+        resourceSize = sizeof(m_fonts[id]);
         UnloadFont(m_fonts[id]);
         m_fonts.erase(id);
         break;
 
     case ResourceType::Texture2D:
         assert(m_textures.contains(id));
+        resourceSize = sizeof(m_textures[id]);
         UnloadTexture(m_textures[id]);
         m_textures.erase(id);
         break;
 
     case ResourceType::Image:
         assert(m_images.contains(id));
+        resourceSize = sizeof(m_images[id]);
         UnloadImage(m_images[id]);
         m_images.erase(id);
         break;
@@ -251,6 +280,10 @@ void ResourceManager::unloadResourceById_(int id)
 
     m_resourceMap.erase(id);
     m_resourceIdLookup.erase(resource.name);
+
+    if (resourceSize > -1) {
+        m_diagnostics.addUnloadedResource(resourceSize);
+    }
 }
 
 void ResourceManager::unloadResource(std::string name)
@@ -313,6 +346,8 @@ void ResourceManager::unloadScope(std::string scope)
 
     m_scopedResources[scope].clear();
     m_scopedResources.erase(scope);
+    
+    // TODO: DIAGNOSTICS
 }
 
 // Getters

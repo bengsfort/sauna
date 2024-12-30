@@ -18,7 +18,6 @@ public:
 	virtual void drawScene() override;
 
 private:
-	int m_currTick = 0;
 	Camera3D m_camera = { 0 };
 	Model* m_workbench = nullptr;
 	Model* m_tree = nullptr;

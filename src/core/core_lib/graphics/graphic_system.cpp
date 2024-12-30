@@ -40,13 +40,10 @@ void GraphicSystem::draw(sauna_scene::GameScene* scene)
 	BeginDrawing();
 	ClearBackground(this->clearColor);
 
-	if (scene == nullptr) {
-		// TODO: Iterate over drawables.
-		DrawText("No active scene!", m_windowWidth * 0.5f, m_windowHeight * 0.5f, 24, WHITE);
-	} else {
+	// TODO: Iterate over drawables instead of pointer chasing a scene.
+	if (scene != nullptr) {
 		scene->drawScene();
 	}
 
-	DrawFPS(16.0f, m_windowHeight - 24.0f);
 	EndDrawing();
 }

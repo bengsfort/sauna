@@ -1,7 +1,9 @@
 #include <string>
+#include <format>
 
 #include "raylib.h"
 #include "core_lib/core/resource_manager.h"
+#include "core_lib/core/engine_diagnostics.h"
 
 #include "./test_scene.h"
 
@@ -9,6 +11,7 @@ namespace sauna_game
 {
 
 using namespace sauna_scene;
+using namespace sauna_core;
 
 TestScene::TestScene() : GameScene()
 {}
@@ -36,15 +39,23 @@ void TestScene::init()
 
 void TestScene::update()
 {
-    m_currTick += 1;
+    // TODO: IMPLEMENT
 }
 
 void TestScene::drawScene()
 {
-    std::string label = "TestScene current tick: ";
-    label +=  std::to_string(m_currTick);
-    DrawText(label.c_str(), 16, 16, 20, WHITE);
+    auto *frameData = EngineDiagnostics::getFrameDiagnostics();
+    auto *resourceData = EngineDiagnostics::getResourceDiagnostics();
 
+    auto updateTimeLabel = std::format(
+        "Avg frame update time: {}\nMax frame update time: {}\nMin frame update time: {}\nActive resource count: {}\nTotal resources loaded: {}\nAvg resource load time: {}",
+        frameData->averageFrameTime,
+        frameData->maxFrameTime,
+        frameData->minFrameTime,
+        resourceData->numActiveResources,
+        resourceData->totalResourcesLoaded,
+        resourceData->averageLoadTime);
+    DrawText(updateTimeLabel.c_str(), 16, 16, 20, WHITE);
     BeginMode3D(m_camera);
     UpdateCamera((Camera*)&m_camera, CAMERA_ORBITAL);
     DrawModel(*m_workbench, { 0.0f, 0.0f, 0.0f }, 1.0f, WHITE);

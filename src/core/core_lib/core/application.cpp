@@ -4,6 +4,8 @@
 #include "core_lib/core/application.h"
 #include "core_lib/core/logger.h"
 #include "core_lib/core/resource_manager.h"
+#include "core_lib/chrono/clock.h"
+#include "core_lib/core/engine_diagnostics.h"
 
 using namespace sauna_core;
 
@@ -15,7 +17,11 @@ void Application::init()
 	Logger::Init();
 	Logger::LogInfo("Application init");
 
+	sauna_chrono::Clock::Init();
 	ResourceManager::Init();
+	auto &resources = ResourceManager::Get();
+	EngineDiagnostics::setFrameData(&sauna_chrono::Clock::GetFrameDiagnostics());
+	EngineDiagnostics::setResourceData(&resources.getDiagnostics());
 
 	SetTargetFPS(144);
 	this->initCoreSystems();
@@ -38,10 +44,12 @@ void Application::run()
 
 void Application::update()
 {
-	// Consume input
-
+	sauna_chrono::Clock::Tick();
+	// TODO: Consume input
 	sceneManager.updateActiveScene();
+	sauna_chrono::Clock::MarkUpdateDone();
 	graphics.draw(sceneManager.getActiveScene());
+	sauna_chrono::Clock::MarkDrawDone();
 }
 
 void Application::shutdown()
@@ -50,6 +58,7 @@ void Application::shutdown()
 	this->cleanupCoreSystems();
 
 	ResourceManager::Shutdown();
+	sauna_chrono::Clock::Shutdown();
 	Logger::Shutdown();
 }
 
