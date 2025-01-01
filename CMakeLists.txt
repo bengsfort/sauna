@@ -4,7 +4,7 @@ project(Sauna)
 # Todo: Add a way to build the game and editor separately
 
 # Enable cpp
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Generate compile_commands.json
@@ -35,13 +35,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #   endif()
 # endif()
 
-# Resources
-set(RESOURCES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
-add_custom_target(copy_resources ALL
-	COMMAND ${CMAKE_COMMAND} -E copy_directory
-	${RESOURCES_DIR} ${CMAKE_BINARY_DIR}/resources
-	COMMENT "Copying resources to build directory"
-)
+# Shared Resources
+set(GAME_CONTENT_RESOURCES ${CMAKE_SOURCE_DIR}/src/game_content/resources)
 
 # Sources
 option(BUILD_EDITOR "Build the editor executable" ON)
@@ -49,6 +44,7 @@ option(BUILD_GAME "Build the game executable" ON)
 set(raylib_VERBOSE 1)
 
 add_subdirectory(src/core)
+add_subdirectory(src/game_content)
 add_subdirectory(third_party/raylib)
 
 if (BUILD_EDITOR)

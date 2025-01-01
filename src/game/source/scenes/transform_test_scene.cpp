@@ -1,21 +1,20 @@
 #include <iostream>
 
-#include "./transform_test_scene.h"
-#include "../actors/test_actor.h"
+#include "scenes/transform_test_scene.h"
 
 
 using namespace sauna_game;
 
 void TransformTestScene::initialize()
 {
-	camera = { 0 };
-    camera.position = { 0.0f, 10.0f, 10.0f };  // Camera position
-    camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
-    camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
-    camera.fovy = 45.0f;                                // Camera field-of-view Y
-    camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
+	// camera = { 0 };
+    // camera.position = { 0.0f, 10.0f, 10.0f };  // Camera position
+    // camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
+    // camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
+    // camera.fovy = 45.0f;                                // Camera field-of-view Y
+    // camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
-	addActor<TestActor>(this);
+	// addActor<TestActor>(this);
 }
 
 // void TransformTestScene::update()
