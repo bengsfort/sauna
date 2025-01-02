@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "core_lib/scene/scene.h"
+#include "core_lib/graphics/drawable.h"
 
 namespace sauna_graphics
 {
@@ -36,6 +37,10 @@ public:
 	void draw(GameScene* scene);
 	void shutdown();
 
+	void registerDrawable(Drawable drawable);
+	RenderTexture2D& requestRenderTexture();
+	void releaseRenderTexture();
+
 public:
 	Color clearColor = BLACK;
 
@@ -44,6 +49,9 @@ protected:
 	int m_windowHeight = DEFAULT_WINDOW_HEIGHT;
 	int m_windowWidth = DEFAULT_WINDOW_WIDTH;
 
+	// TODO: active camera api?
+	// TODO: array of drawable3d, drawableUi, drawable2d, rendertexture? api to add?
+	// note: downside is cleanup... might be good to register a scene graph which maintains these to keep them sandboxed?
 	// TODO: Array of Drawables (Or do we have the scene cache drawables, and have the API be "draw scene"?)
 };
 

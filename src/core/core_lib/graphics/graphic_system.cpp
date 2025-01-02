@@ -45,5 +45,19 @@ void GraphicSystem::draw(sauna_scene::GameScene* scene)
 		scene->drawScene();
 	}
 
+	/* ideal flow:
+	
+	begin3d(active camera)
+
+	for drawable in 3d drawable collection
+
+	draw( drawable )
+
+	end3d
+
+	begin2d
+
+	*/
+
 	EndDrawing();
 }
