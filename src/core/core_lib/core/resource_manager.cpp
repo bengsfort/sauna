@@ -98,7 +98,7 @@ void ResourceManager::queueResources(std::initializer_list<const Resource> resou
 
 void ResourceManager::clearQueue()
 {
-    m_diagnostics.removeQueuedResource(m_queue.size());
+    m_diagnostics.removeQueuedResource((int)m_queue.size());
     m_queue.clear();
 }
 
@@ -205,7 +205,7 @@ void ResourceManager::loadQueuedResources()
             m_loadActive = false;
             m_loadProgress = 0.0f;
             m_cancelLoadFlag = false;
-            m_diagnostics.addCancelledResource(total - numLoaded);
+            m_diagnostics.addCancelledResource((int)total - numLoaded);
             return;
         }
 

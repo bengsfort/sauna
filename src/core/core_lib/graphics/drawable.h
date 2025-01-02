@@ -5,7 +5,7 @@ namespace sauna_graphics
 
 enum class DrawableType
 {
-	Default,
+	UI,
 	Drawable2D,
 	Drawable3D,
 };
@@ -13,7 +13,7 @@ enum class DrawableType
 class Drawable
 {
 public:
-	DrawableType type = DrawableType::Default;
+	DrawableType drawType = DrawableType::UI;
 
 	virtual ~Drawable() {}
 	virtual void draw() = 0;
